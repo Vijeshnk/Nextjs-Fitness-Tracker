@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import loginImage from '../assests/login.jpg'
 import SignInButton from '../components/SignInButton/SignInButton'
+import Link from 'next/link'
 
 const Login = () => {
     return (
@@ -9,7 +10,7 @@ const Login = () => {
             <div className='hidden sm:block'><Image className='w-full h-full object-cover' alt='gym' src={loginImage} priority /></div>
             <div className='bg-gray-800 flex flex-col justify-center'>
                 <form className='max-w-[400px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg'>
-                    <h2 className='text-4xl text-white font-bold text-center'>SIGN IN</h2>
+                    <h2 className='text-4xl text-white font-bold text-center'>Sign In</h2>
                     <div className='flex flex-col text-gray-400 py-2'>
                         <label>User Name</label>
                         <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type='text' autoComplete='username' />
@@ -24,7 +25,16 @@ const Login = () => {
                     </div>
 
                     <SignInButton text='SIGN IN' />
+                    <p className='text-gray-400 text-center'>
+                        New here?{' '}
+                        <Link legacyBehavior href='/signup'>
+                            <a className='no-underline hover:underline cursor-pointer'>
+                                Create an Account
+                            </a>
+                        </Link>
+                    </p>
                 </form>
+
             </div>
 
         </div>
