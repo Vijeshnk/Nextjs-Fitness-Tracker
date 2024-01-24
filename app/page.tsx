@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import ProductCard from "./components/ProductCard/ProductCard";
+
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
     <main>
       <h1>Hello world</h1>
       <Link href="/login">Login</Link>
-      <ProductCard />
+    
     </main>
 
   );
