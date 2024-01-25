@@ -24,7 +24,7 @@ const Login = () => {
                         <p>Forgot Password</p>
                     </div>
 
-                    <SignInButton text='SIGN IN' />
+                    <SignInButton bgColor="bg-yellow-500" text='SIGN IN' />
                     <p className='text-gray-400 text-center'>
                         New here?{' '}
                         <Link legacyBehavior href='/signup'>
