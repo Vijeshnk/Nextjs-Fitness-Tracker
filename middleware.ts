@@ -7,7 +7,9 @@ export function middleware(request: NextRequest) {
         "/dashboard",
         "/home",
         "/category",
-        "/"
+        "/",
+        "/profile",
+        "/settings"
     ];
 
     const publicRoutes = [
