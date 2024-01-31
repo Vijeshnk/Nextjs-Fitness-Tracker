@@ -31,7 +31,7 @@ const SignUp = () => {
 
             const response = await axios.post('http://localhost:3000/auth/signup', data);
             setCookie('token', response.data.token);
-            router.push('/dashboard')
+            router.push('/onboard')
         } catch (error) {
             setError('An unexpected error occurred')
 

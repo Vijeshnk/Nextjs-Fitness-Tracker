@@ -3,17 +3,18 @@ import { useState } from 'react'
 import UserNameEmail from './UserNameEmail'
 import DobGender from './DobGender'
 import Address from './Address'
+import { useRouter } from 'next/navigation';
+
 
 const MainForm = () => {
     const [data, setData] = useState({
-        name: "",
-        email: "",
-        dob: "",
-        gender: "male",
-        address: "",
-    })
-
-
+        age: "",
+        weight: "",
+        fitnessGoal: "",
+        activityLevel: "",
+        dietPreference: "",
+        healthCondition: "",
+    });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = event.target;
@@ -23,14 +24,23 @@ const MainForm = () => {
         });
     };
 
-
-    const [activeTab, setActiveTab] = useState(0)
+    const [activeTab, setActiveTab] = useState(0);
 
     const formElements = [
-        <UserNameEmail key="userNameEmail" data={data} handleChange={handleChange} />,
-        <DobGender key="dobGender" data={data} handleChange={handleChange} />,
-        <Address key="address" data={data} setData={setData} />
-    ]
+        <UserNameEmail key="userDetails" data={{ age: data.age, weight: data.weight }} handleChange={handleChange} />,
+        <DobGender key="dobGender" data={{ fitnessGoal: data.fitnessGoal, activityLevel: data.activityLevel }} handleChange={handleChange} />,
+        <Address key="address" data={{ dietPreference: data.dietPreference, healthCondition: data.healthCondition }} handleChange={handleChange} />
+    ];
+    const router = useRouter();
+
+    const handleSubmit = () => {
+        
+        localStorage.setItem('userData', JSON.stringify(data));
+
+        router.push('/dashboard');
+    };
+
+
 
     return (
         <div className=' flex flex-col justify-center '>
@@ -51,7 +61,7 @@ const MainForm = () => {
                     onClick={() => setActiveTab(prev => prev + 1)}
                     className={`px-4 py-2 rounded-xl bg-blue-600 text-white ${activeTab === formElements.length - 1 ? "opacity-50 bg-slate-600" : "opacity-100"}`}>Next</button>
                 {
-                    activeTab === formElements.length - 1 ? <button className='px-4 py-2 rounded-xl bg-blue-600 text-white' onClick={() => console.log(data)}>Submit</button> : null
+                    activeTab === formElements.length - 1 ? <button className='px-4 py-2 rounded-xl bg-blue-600 text-white' onClick={handleSubmit}>Submit</button> : null
                 }
             </div>
         </div>

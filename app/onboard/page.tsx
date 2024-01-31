@@ -3,7 +3,7 @@ import MainForm from '../components/MultiStepForm/MainForm'
 
 const OnboardPage = () => {
   return (
-    <div className='mt-48'>  <MainForm/></div>
+    <div className='mt-48 '>  <MainForm/></div>
   )
 }
 

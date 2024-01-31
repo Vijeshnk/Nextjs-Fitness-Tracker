@@ -1,97 +1,45 @@
-import { useState, useEffect } from 'react'
+
+import React from 'react';
 
 interface AddressProps {
     data: {
-
-
+        dietPreference: string;
+        healthCondition: string;
     };
-    setData: (data: any) => void;
-}
-
-interface FullAddress {
-    house: string;
-    locality: string;
-    city: string;
-    state: string;
-    zip: string;
-    [key: string]: string; 
+    handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const Address = (props: AddressProps) => {
-    const { data, setData } = props
-
-    const [fullAddress, setFullAddress] = useState<FullAddress>({
-        house: "",
-        locality: "",
-        city: "",
-        state: "",
-        zip: "",
-    })
-
-    const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setFullAddress({
-            ...fullAddress,
-            [name]: value,
-        });
-    };
-
-    useEffect(() => {
-        const isDataEmpty = () => {
-            for (const key in fullAddress) {
-                if (fullAddress[key].trim() === "") {
-                    return true;
-                }
-            }
-            return false;
-        };
-        if (!isDataEmpty()) {
-            setData({
-                ...data,
-                address: fullAddress
-            })
-        }
-    }, [fullAddress])
+    const { data, handleChange } = props;
 
     return (
-        <form className="w-full max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="house-no">
-                        House no.
+        <div className="max-w-xs md:max-w-lg mx-auto">
+            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <div className="mb-10">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="dietPreference">
+                        Diet Preference
                     </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="house" type="text" placeholder="house no." value={fullAddress.house} onChange={handleAddressChange} />
+                    <select name="dietPreference" value={data.dietPreference} onChange={handleChange} className="block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
+                        <option value="omnivore">Omnivore</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="pescatarian">Pescatarian</option>
+                    </select>
                 </div>
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="locality">
-                        Locality
+                <div>
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="healthCondition">
+                        Health Condition
                     </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="locality" type="text" placeholder="locality" value={fullAddress.locality} onChange={handleAddressChange} />
+                    <select name="healthCondition" value={data.healthCondition} onChange={handleChange} className="block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
+                        <option value="none">None</option>
+                        <option value="diabetes">Diabetes</option>
+                        <option value="hypertension">Hypertension</option>
+                        <option value="heartDisease">Heart Disease</option>
+                    </select>
                 </div>
-            </div>
-
-            <div className="flex flex-wrap -mx-3 mb-2">
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="city">
-                        City
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="city" type="text" placeholder="city" value={fullAddress.city} onChange={handleAddressChange} />
-                </div>
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="state">
-                        State
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="state" type="text" placeholder="state" value={fullAddress.state} onChange={handleAddressChange} />
-                </div>
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="zip">
-                        Zip
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="zip" type="text" placeholder="zip code" value={fullAddress.zip} onChange={handleAddressChange} />
-                </div>
-            </div>
-        </form>
-    )
+            </form>
+        </div>
+    );
 }
 
-export default Address
+export default Address;

@@ -26,7 +26,7 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:3000/auth/login', data);
             setCookie('token', response.data.token);
-            router.push('/onboard'); 
+            router.push('/dashboard '); 
         } catch (err) {
             setError('Failed to log in. Please check your credentials.');
         }
